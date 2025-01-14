@@ -1,29 +1,73 @@
-<h3 align="center">
-    <h2>Welcome to My Project Status Record for: sandyscommunitycentre.com</h2>
-</h3>
+# Sandy's Community Centre
 
-<h3 align="center">
-    <h2>Repository Purpose</h2>
-    <p>I am utilizing this GitHub repository to document and manage the ongoing development work for Sandy's community centers' Content Management System (CMS) and website.</p><p>While GitHub is primarily designed for collaborative project development and sharing code with others, I am utilizing it in a unique capacity as a live record of work that cannot be fully showcased. In this context.</p><p>By leveraging GitHub in this manner, I strike a balance between utilizing its powerful tools for efficient project management and safeguarding the privacy of certain aspects of the work that are not intended for public visibility.</p>
-    <p>View the project <a href="https://sandyscommunitycentre.com/">here</a>
+[![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fsandyscommunitycentre.com)](https://sandyscommunitycentre.com)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Alexander-Milligan/SandysCommunityCentre)](https://github.com/Alexander-Milligan/SandysCommunityCentre)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.2-blue)](https://getbootstrap.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-</h3>
+## Welcome
 
-<h3 align="center">
-    <h1>----------------------------------------------------------------</h1>
-    <h1>Last Update</h1>
-    <h2>Full Bootstrap Revamp: Brief</h2><h4>Date: 18/01/2024</h4>
-    <h4>As I have upgraded my skills to use Bootstrap, I have finished revamping the entire site with this new CSS method. I really like using Bootstrap now; it's looking good.</h4>
-    <h1>----------------------------------------------------------------</h1>
-    <h2>Website content updating: Brief</h2><h4>Date: 15/01/2024</h4>
-    <h4>Due to continuous club changes or new clubs being created, the website's club page is in a continuous state of change. This is where my bespoke CMS comes into play, as most of the text changes and image updates have been handled effortlessly by Sandy's admin staff. I, as the developer, was asked to rearrange areas of content based on the client's requests, while the remaining tasks were completed seamlessly by the CMS.</h4>
-</h3>
+This repository serves as the project status record for **[sandyscommunitycentre.com](https://sandyscommunitycentre.com)**. It is used to document the ongoing development and updates of:
+- The **Content Management System (CMS)** for seamless website management.
+- The **Survey Application** for collecting, analyzing, and visualizing user input.
 
-<h3 align="center">
-<h1>--------------------------------------------------------------------</h1>
-    <h1>General Task</h1>
-    <h2>Brief: </h2><h4>Date: Every 4th of the mounth.</h4>
-    <h4>I like to have all projects on a routine checklist for server mailing, hosting, domain billing, and SEO tasks.</h4>
-</h3>
+---
 
-<h3 align="left">Connect with me: Alexander0milligan@gmail.com</h3>
+## 🛠 Repository Purpose
+
+This GitHub repository is not just for code sharing. It also acts as a live record of work that cannot always be fully showcased. By leveraging GitHub in this unique way:
+- I document my development journey.
+- I manage the project efficiently.
+- I maintain privacy for sensitive elements of the work that aren't meant for public visibility.
+
+👉 **[View the live project](https://sandyscommunitycentre.com)**
+
+---
+
+## 🚀 Features
+
+### 🔧 **Content Management System (CMS)**
+- **Dynamic Content Updates**: Admins can easily update website content without technical expertise.
+- **Text and Image Management**: Admin staff seamlessly handle media and textual updates.
+- **User-Friendly Design**: Intuitive interface for non-technical users.
+
+### 📊 **Survey Application**
+- **User Input Collection**: Collects and stores survey responses from users.
+- **Data Visualization**:
+  - Bar Charts
+  - Pie Charts
+  - Formatted Data Displays
+- **PDF Reporting**: Generates professional, visually appealing reports for analysis.
+
+### 🌐 **General Features**
+- **Responsive Design**: Built using modern, responsive design principles with **Bootstrap**.
+- **SEO Optimization**: Regular tasks to improve visibility on search engines.
+
+---
+
+## 📅 Updates and Milestones
+
+### Full Bootstrap Revamp
+**Date:** 18/01/2024  
+**Summary:**  
+Revamped the entire website using Bootstrap, enhancing responsiveness and modernizing the design.
+
+---
+
+### Website Content Updating
+**Date:** 15/01/2024  
+**Summary:**  
+Continuously updated club pages to reflect changes or new clubs. Admins used the CMS for text and image updates, while I rearranged content layouts per client requests.
+
+---
+
+### Survey Application Enhancements
+**Date:** Ongoing  
+**Summary:**  
+Added powerful data visualization features and reporting capabilities. The tool enables Sandy's Community Centre to collect and analyze user feedback effectively.
+
+---
+
+### General Maintenance Tasks
+**Date:** Every 4th of the Month  
+**Summar
