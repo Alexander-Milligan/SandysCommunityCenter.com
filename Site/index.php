@@ -319,6 +319,10 @@
     
     <div class="container">
         <?php include 'Locker/Views/header.php'; ?>
+        <!-- Success/Error Message Display -->
+        <?php if(isset($_SESSION['message'])): ?>
+            <p class="message"><?= $_SESSION['message']; unset($_SESSION['message']); ?></p>
+        <?php endif; ?>
         <?php include 'Locker/Conductor.php'; ?>
         <?php include 'Locker/Views/footer.php'; ?>
     </div>
