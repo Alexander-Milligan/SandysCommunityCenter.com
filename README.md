@@ -71,3 +71,9 @@ Added powerful data visualization features and reporting capabilities. The tool 
 ### General Maintenance Tasks
 **Date:** Every 4th of the Month  
 **Summar
+
+---
+
+### Timetable & Watsonians pages 
+**Date:** 06/02/2025  
+**Summar:** A timetable with colour coded key has been created and attached to the club page for more information, these pages are basic html, css, bootstrap and js inline with a database and tables a to give capabilities of editing, adding or deleting later. 

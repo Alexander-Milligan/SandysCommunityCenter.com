@@ -114,9 +114,6 @@
         </ul>
     </div>
 
-
-
-
     <div class="container">
         <div class="card" style="width: 100%;">
             <img style="width: 60%; margin: auto;" src="../assets/img/Logo.png" tabindex="1"
@@ -130,7 +127,7 @@
                             <span class="navbar">Menu</span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarScroll">
-                            <form action="index.php" method="post" style="width: 85%; margin: auto;"">
+                            <form action="../index.php" method="post" style="width: 85%; margin: auto;"">
                                 <ul class=" navbar-nav m-2">
                                 <li class="nav-item">
                                     <button tabindex="2" class="btn btn-primary m-2" name="NavDir"
@@ -942,6 +939,48 @@
     <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+        <script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Get club name from URL parameter (e.g., ?club=Boxing Club)
+    const urlParams = new URLSearchParams(window.location.search);
+    const clubName = urlParams.get("club");
+
+    if (clubName) {
+        function generateClubID(name) {
+            return name.toLowerCase()
+                .replace(/&/g, "and") // Convert '&' to 'and'
+                .replace(/[^a-z0-9 ]/g, "") // Remove special characters
+                .replace(/\s+/g, "-"); // Replace spaces with hyphens
+        }
+
+        let slides = document.querySelectorAll(".carousel-item");
+        let indicators = document.querySelectorAll("[data-bs-slide-to]");
+        let targetIndex = null;
+
+        slides.forEach((slide, index) => {
+            let clubHeader = slide.querySelector("h3");
+            if (clubHeader) {
+                let slideClubName = generateClubID(clubHeader.innerText.trim());
+                if (slideClubName === generateClubID(clubName)) {
+                    targetIndex = index;
+                }
+            }
+        });
+
+        if (targetIndex !== null) {
+            let carouselElement = document.querySelector("#carouselExampleDark");
+            let carousel = new bootstrap.Carousel(carouselElement);
+            
+            // Move the carousel to the correct slide
+            carousel.to(targetIndex);
+        }
+    }
+});
+
+
+        </script>
+        
+        
 </body>
 
 </html>
