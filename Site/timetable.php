@@ -196,10 +196,10 @@
                 <div class="row">
                     <div class="col-md-6">
                     <div class="key-item d-flex align-items-center">
-                            <span class="badge" style="background-color: #ff3300;"></span> <!-- Red -->
+                            <span class="badge" style="background-color: #28a745;"></span> <!-- Red -->
                             <i class="fas fa-users me-3"></i> <!-- Icon for Sandy's run group -->
                             <span>Sandy's run group - open to public</span>
-                            <span class="color-box" style="background-color: #ff3300;"></span>
+                            <span class="color-box" style="background-color: #28a745;"></span>
                         </div>
                         <div class="key-item d-flex align-items-center">
                             <span class="badge" style="background-color: #0066cc;"></span> <!-- Blue -->
@@ -208,10 +208,10 @@
                             <span class="color-box" style="background-color: #0066cc;"></span>
                         </div>
                         <div class="key-item d-flex align-items-center">
-                            <span class="badge" style="background-color: #28a745;"></span> <!-- Green -->
+                            <span class="badge" style="background-color: #ff3300;"></span> <!-- Green -->
                             <i class="fas fa-building me-3"></i>
                             <span>City of Edinburgh Council</span>
-                            <span class="color-box" style="background-color: #28a745;"></span>
+                            <span class="color-box" style="background-color: #ff3300;"></span>
                         </div>
                         <div class="key-item d-flex align-items-center">
                             <span class="badge" style="background-color: #ffffff; border: 1px solid #ccc;"></span> <!-- White -->
