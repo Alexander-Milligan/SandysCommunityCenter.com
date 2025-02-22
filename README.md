@@ -47,6 +47,37 @@ This GitHub repository is not just for code sharing. It also acts as a live reco
 
 ## 📅 Updates and Milestones
 
+### Timetable & Watsonians pages 
+**Date:** 06/02/2025  
+**Summary:**  
+A timetable with a colour-coded key has been created and attached to the club page for additional information. These pages are built with basic HTML, CSS, Bootstrap, and inline JavaScript, integrated with a database and tables to allow future editing, adding, or deleting capabilities.
+
+### Website Updates Report  
+**Date:** 22/02/2025  
+**Summary:**  
+- **Timetable & Clubs Integration:**  
+  A new timetable page has been added alongside an updated clubs page. Clubs are now colour-coded by their organizers, ensuring clear and quick information access.
+  
+- **Survey Data Display:**  
+  A dedicated page now presents survey data with key trends, community feedback, and statistics. This page includes social media sharing options and a PDF converter for sharing data with funding bodies.
+  
+- **The Watsonian 1904–54:**  
+  A new Watsonian page provides historical insights into Sandy's, offering valuable context for both new and younger members and deepening community engagement.
+  
+- **Website Traffic Insights:**  
+  Analytics indicate a bounce rate of 70% for returning visitors—a strong sign that the site is a valuable resource for up-to-date community information.
+  
+- **SEO Analysis:**  
+  - **Title:** Sandy's Community Centre  
+  - **Meta Description:** Sandy's Community Centre provides high-quality essential services, particularly to the most vulnerable and at-risk members of the Craigmillar community.  
+  - **Word Count:** 938  
+  - **Header Tags:** 1 H1, 1 H2, and 1 H3  
+  - **Integrations:** Google Analytics is installed, Bootstrap is utilised, and the site is HTTPS secure.  
+  - **SEO Score:** 70 / 100
+  
+- **Areas for Improvement:**  
+  Future work includes revamping the "Become a Friend" form, double-checking the clubs page for timing updates, and exploring the addition of a community newsletter to extend outreach.
+  
 ### Full Bootstrap Revamp
 **Date:** 18/01/2024  
 **Summary:**  
