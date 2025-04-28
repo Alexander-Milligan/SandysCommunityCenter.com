@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset="utf-8">
+  <title>Community Centre Insights</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap & Chart.js CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Leaflet Map CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+  <style>
+    body {
+      background-color: #f4f6f9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .indicator-card {
+      background: #fff;
+      border-left: 6px solid #0d6efd;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 1rem;
+    }
+
+    .chart-card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: 100%;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0d6efd;
+      margin-bottom: 1rem;
+    }
+
+    .conclusion-box {
+      background: #e6f0ff;
+      border-left: 6px solid #0d6efd;
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+
+    canvas {
+      height: 300px !important;
+    }
+
+    .timeline .list-group-item {
+      border-left: 5px solid #0d6efd;
+      background-color: #f9f9f9;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+    }
+
+/* Force full width for small screens */
+@media (max-width: 768px) {
+  .container, .container-fluid, .card, .indicator-card, .chart-card {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .row > [class^="col-"] {
+    margin-bottom: 1rem;
+  }
+
+  .chart-card canvas {
+    height: 200px !important;
+  }
+
+  .card-body, .accordion-body {
+    padding: 1rem !important;
+  }
+
+  /* Force horizontal scroll on smaller screens for table */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* For smoother iOS scrolling */
+}
+
+.table-responsive table {
+  min-width: 600px; /* Ensures the table doesn't shrink too small */
+  white-space: nowrap; /* Prevents cells from wrapping */
+}
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  .accordion-button {
+    font-size: 1rem;
+  }
+
+  h2, h3, h4, h5 {
+    font-size: 1.25rem;
+  }
+
+  p, li {
+    font-size: 0.95rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container py-5">
+
+  <h2 class="text-center text-primary mb-4">Sandy's Community Centre Engagement Summary</h2>
+  <div class="container mb-4">
+    <div class="p-4 bg-white border-start border-primary border-4 rounded shadow-sm">
+      <h4 class="text-primary">About This Page</h4>
+      <p>
+        This page gives you a clear, visual overview of how our community centre is being used — 
+        including which activities are most popular, how satisfied our users are, and when people prefer to visit.
+        It's designed for everyone, whether you're part of the community, a team member, or a partner organisation. 
+        All charts and highlights are based on real feedback and activity records to help us improve and grow together.
+      </p>
+    </div>
+  </div>
+  
+  <!-- Indicator Cards -->
+  <div class="row text-center">
+    <div class="col-md-4">
+      <div class="indicator-card">
+        <h5 class="fw-bold mb-1">Very Satisfied Users</h5>
+        <p class="fs-4 text-success">13</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="indicator-card">
+        <h5 class="fw-bold mb-1">Most Popular Activity</h5>
+        <p class="fs-5">Sandy’s Kids Club (40+ kids)</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="indicator-card">
+        <h5 class="fw-bold mb-1">Typical Group Size</h5>
+        <p class="fs-5">20–50 people</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid my-5">
+    <div class="card shadow-lg border-0">
+      <div class="card-body bg-light py-4 px-5">
+        <h3 class="text-primary fw-bold mb-4">Community Impact – Week of 17th Feb 2025</h3>
+        <p style="font-size: 1.1rem; line-height: 1.8;">
+          🧒 <strong>167+</strong> Youth Participants Engaged<br>
+          👥 <strong>566+</strong> Total Attendees Across All Sessions<br>
+          📅 <strong>22</strong> Community Sessions Delivered<br>
+          🌍 <strong>10+</strong> Activity Types Offered (Support, Sports, Arts, Learning & More)<br>
+          ❤️ <strong>One Vision:</strong> A Strong, Welcoming, and Empowered Community
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Charts Section -->
+  <div class="row my-4">
+    <div class="col-md-6">
+      <div class="chart-card">
+        <h6 class="text-center section-title">Satisfaction Level</h6>
+        <canvas id="satisfactionChart"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-card">
+        <h6 class="text-center section-title">Preferred Visit Times</h6>
+        <canvas id="timeChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-3 text-center">
+    <small>
+      <span style="color:#198754;">🟢</span> Local Area &nbsp;
+      <span style="color:#fd7e14;">🟠</span> Extended Community &nbsp;
+      <span style="color:#dc3545;">🔴</span> Broader Reach
+    </small>
+  </div>
+
+  <div class="container my-5">
+
+        <h4 class="text-primary mb-3">Our Activities Reach Across Craigmillar</h4>
+        <p class="mb-3">
+          This map shows how one community centre — <strong>Sandy’s Community Centre</strong> — creates a ripple of impact across the wider Craigmillar area. 
+          The circles represent how activities and support extend from the centre into the surrounding neighbourhoods, showing local, extended, and broader reach.
+        </p>
+        <p class="mb-3">
+          If this is the effect of just one centre, it powerfully highlights the vital role community centres play in local life. 
+          From early years support to youth activities, family engagement, social connection and essential services — the reach is wide and meaningful.
+          It makes a strong case for not only protecting but investing in <strong>all community centres</strong> across the city.
+        </p>
+        <p class="mb-4 text-muted">
+          Every community deserves a safe, welcoming space like Sandy’s — where people can connect, grow, and thrive together.
+        </p>
+
+    <div id="activityMap" style="height: 400px; border-radius: 10px;"></div>
+  </div>
+
+  <div class="container my-5">
+    <h4 class="text-primary mb-3">How Your Feedback Made a Difference</h4>
+    <ul class="list-group list-group-flush timeline">
+      <li class="list-group-item">
+        <strong>Jan 2024</strong> – Feedback showed need for child-friendly spaces → <em>Parent & Toddlers group expanded</em>
+      </li>
+      <li class="list-group-item">
+        <strong>Apr 2024</strong> – Users requested better access → <em>Disabled toilet and ramp installed</em>
+      </li>
+      <li class="list-group-item">
+        <strong>Sep 2024</strong> – More social activities wanted → <em>Golden Gems Bingo Group launched</em>
+      </li>
+      <li class="list-group-item">
+        <strong>Feb 2025</strong> – Youth activities rated highest → <em>More Sandy’s Kids Club sessions added</em>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Additional Info -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="conclusion-box">
+        <h5 class="fw-bold">Conclusion</h5>
+        <p>
+          Community centres are essential, providing warm, welcoming, and accessible spaces for families and residents.
+          With popular programs like Sandy’s Kids Club and parent groups, they remain central to neighbourhood wellbeing.
+          Participants highlighted great communication, safety, and location. Investment in buildings and activities will keep this success growing.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  
+
+<!-- WEEKLY PROGRAMME HEADING + INTRO -->
+<div class="container my-5">
+    <h4 class="text-primary mb-3">Programme – Week Beginning 17th Feb 2025</h4>
+    <p>
+      Explore the range of sessions running at <strong>Sandy’s Community Centre</strong> this week. 
+      From arts and crafts to youth sessions, family groups, and wellbeing — there’s something for everyone.
+    </p>
+  
+    <!-- COLLAPSIBLE MOBILE VIEW -->
+    <div class="d-lg-none accordion my-4" id="programmeAccordion">
+
+      <!-- Monday -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingMonday">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMonday">
+            Monday
+          </button>
+        </h2>
+        <div id="collapseMonday" class="accordion-collapse collapse show">
+          <div class="accordion-body">
+            <ul class="list-unstyled mb-0">
+              <li><strong>9am–11am:</strong> Working Rite <span class="badge bg-info">Employability</span> <span class="expected-badge">8 expected</span></li>
+              <li><strong>11am–1:30pm:</strong> Parent & Toddlers <span class="badge bg-success">Family Support</span> <span class="expected-badge">30 expected</span></li>
+              <li><strong>2pm–5pm:</strong> Sandy’s Stitchers <span class="badge bg-secondary">Adult Sewing</span> <span class="expected-badge">5 expected</span></li>
+              <li><strong>3pm–5pm:</strong> Let’s Make Stuff <span class="badge bg-warning text-dark">Kids Craft</span> <span class="expected-badge">8 expected</span></li>
+              <li><strong>5:30pm–8:30pm:</strong> Craigmillar A.B.C Boxing Club <span class="badge bg-danger">Sports</span> <span class="expected-badge">20 expected</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tuesday -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTuesday">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTuesday">
+            Tuesday
+          </button>
+        </h2>
+        <div id="collapseTuesday" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <ul class="list-unstyled mb-0">
+              <li><strong>9:30am–11:30am:</strong> Focus Group <span class="badge bg-primary">ASN Kids</span> <span class="expected-badge">18 expected</span></li>
+              <li><strong>11am–1pm:</strong> Mums and Babies <span class="badge bg-dark">Refugee Support</span> <span class="expected-badge">20 expected</span></li>
+              <li><strong>3pm–5pm:</strong> Sandy’s Kids Club <span class="badge bg-warning text-dark">After School</span> <span class="expected-badge">40 expected</span></li>
+              <li><strong>5:30pm–8:30pm:</strong> Craigmillar A.B.C Boxing Club <span class="badge bg-danger">Sports</span> <span class="expected-badge">50 expected</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wednesday -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingWednesday">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWednesday">
+            Wednesday
+          </button>
+        </h2>
+        <div id="collapseWednesday" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <ul class="list-unstyled mb-0">
+              <li><strong>9:30am–11:30am:</strong> ASN Movement <span class="badge bg-primary">ASN Kids</span> <span class="expected-badge">8 expected</span></li>
+              <li><strong>9:30am–11am:</strong> Focus Group <span class="badge bg-primary">ASN Kids</span> <span class="expected-badge">17 expected</span></li>
+              <li><strong>11am–1:30pm:</strong> Chill and Chat <span class="badge bg-info">Wellbeing Group</span> <span class="expected-badge bg-secondary">Unknown</span></li>
+              <li><strong>12pm–2:30pm:</strong> Golden Gems <span class="badge bg-warning text-dark">Lunch & Bingo</span> <span class="expected-badge">12 expected</span></li>
+              <li><strong>3pm–5pm:</strong> Sandy’s Kids Club <span class="badge bg-warning text-dark">After School</span> <span class="expected-badge">39 expected</span></li>
+              <li><strong>5:30pm–8:30pm:</strong> Craigmillar A.B.C Boxing Club <span class="badge bg-danger">Sports</span> <span class="expected-badge">20 expected</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thursday -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThursday">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThursday">
+            Thursday
+          </button>
+        </h2>
+        <div id="collapseThursday" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <ul class="list-unstyled mb-0">
+              <li><strong>11am–1:30pm:</strong> Cook Club <span class="badge bg-secondary">Community Group with Support Needs</span> <span class="expected-badge">15 expected</span></li>
+              <li><strong>11am–1:30pm:</strong> Parent Drop-In <span class="badge bg-success">Family Support</span> <span class="expected-badge bg-secondary">Unknown</span></li>
+              <li><strong>5:30pm–8:30pm:</strong> St Teresa’s Youth Group <span class="badge bg-primary">Youth Activities</span> <span class="expected-badge">16 expected</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Friday -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFriday">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFriday">
+            Friday
+          </button>
+        </h2>
+        <div id="collapseFriday" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <ul class="list-unstyled mb-0">
+              <li><strong>1:30pm–5:30pm:</strong> Poloniusz <span class="badge bg-danger">Education</span> <span class="expected-badge">51 expected</span></li>
+              <li><strong>5:30pm–8:30pm:</strong> Craigmillar A.B.C Boxing Club <span class="badge bg-danger">Sports</span> <span class="expected-badge">16 expected</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saturday -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSaturday">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSaturday">
+            Saturday
+          </button>
+        </h2>
+        <div id="collapseSaturday" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <ul class="list-unstyled mb-0">
+              <li><strong>9:30am–1:30pm:</strong> Poloniusz <span class="badge bg-danger">Education</span> <span class="expected-badge">69 expected</span></li>
+              <li><strong>2:30pm–5:30pm:</strong> Play Group <span class="badge bg-danger">Education</span> <span class="expected-badge">40 expected</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunday -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSunday">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSunday">
+            Sunday
+          </button>
+        </h2>
+        <div id="collapseSunday" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <ul class="list-unstyled mb-0">
+              <li><strong>All Day:</strong> EFIGOC <span class="badge bg-dark">Community Booking</span> <span class="expected-badge">3 expected</span></li>
+              <li><strong>All Day:</strong> African Church <span class="badge bg-dark">Faith Group</span> <span class="expected-badge">50 expected</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESKTOP TABLE VIEW -->
+    <div class="table-responsive d-none d-lg-block">
+      <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-light">
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Session</th>
+            <th>Type</th>
+            <th>Expected Attendance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Monday</td><td>9am – 11am</td><td>Working Rite</td><td><span class="badge bg-info">Employability</span></td><td>8</td></tr>
+          <tr><td>Monday</td><td>11am – 1:30pm</td><td>Parent & Toddlers</td><td><span class="badge bg-success">Family Support</span></td><td>30</td></tr>
+          <tr><td>Monday</td><td>2pm – 5pm</td><td>Sandy’s Stitchers</td><td><span class="badge bg-secondary">Adult Sewing</span></td><td>5</td></tr>
+          <tr><td>Monday</td><td>3pm – 5pm</td><td>Let’s Make Stuff</td><td><span class="badge bg-warning text-dark">Kids Craft</span></td><td>8</td></tr>
+          <tr><td>Monday</td><td>5:30pm – 8:30pm</td><td>Craigmillar A.B.C Boxing Club</td><td><span class="badge bg-danger">Sports</span></td><td>20</td></tr>
+  
+          <tr><td>Tuesday</td><td>9:30am – 11:30am</td><td>Focus Group</td><td><span class="badge bg-primary">ASN Kids</span></td><td>18</td></tr>
+          <tr><td>Tuesday</td><td>11am – 1pm</td><td>Mums and Babies</td><td><span class="badge bg-dark">Refugee Support</span></td><td>20</td></tr>
+          <tr><td>Tuesday</td><td>3pm – 5pm</td><td>Sandy’s Kids Club</td><td><span class="badge bg-warning text-dark">After School</span></td><td>40</td></tr>
+          <tr><td>Tuesday</td><td>5:15pm – 7:15pm</td><td>Livity Youth Football Project</td><td><span class="badge bg-warning text-dark">Sports</span></td><td>Unknown</td></tr>
+          <tr><td>Tuesday</td><td>5:30pm – 8:30pm</td><td>Craigmillar A.B.C Boxing Club</td><td><span class="badge bg-danger">Sports</span></td><td>50</td></tr>
+  
+          <tr><td>Wednesday</td><td>9:30am – 11:30am</td><td>ASN Movement</td><td><span class="badge bg-primary">ASN Kids</span></td><td>8</td></tr>
+        <tr><td>Wednesday</td><td>9:30am – 11am</td><td>Focus Group</td><td><span class="badge bg-primary">ASN Kids</span></td><td>17</td></tr>
+        <tr><td>Wednesday</td><td>11am – 1:30pm</td><td>Chill and Chat</td><td><span class="badge bg-info">Wellbeing Group</span></td><td>Unknown</td></tr>
+        <tr><td>Wednesday</td><td>12pm – 2:30pm</td><td>Golden Gems</td><td><span class="badge bg-warning text-dark">Lunch & Bingo</span></td><td>12</td></tr>
+        <tr><td>Wednesday</td><td>3pm – 5pm</td><td>Sandy’s Kids Club</td><td><span class="badge bg-warning text-dark">After School</span></td><td>39</td></tr>
+        <tr><td>Wednesday</td><td>5:30pm – 8:30pm</td><td>Craigmillar A.B.C Boxing Club</td><td><span class="badge bg-danger">Sports</span></td><td>20</td></tr>
+
+        <tr><td>Thursday</td><td>11am – 1:30pm</td><td>Cook Club</td><td><span class="badge bg-secondary">Community Group with Support Needs</span></td><td>15</td></tr>
+        <tr><td>Thursday</td><td>11am – 1:30pm</td><td>Parent Drop-In</td><td><span class="badge bg-success">Family Support</span></td><td>Unknown</td></tr>
+        <tr><td>Thursday</td><td>5:30pm – 8:30pm</td><td>St Teresa’s Youth Group</td><td><span class="badge bg-primary">Youth Activities</span></td><td>16</td></tr>
+        <tr>
+            <td>Friday</td>
+            <td>5:30pm – 8:30pm</td>
+            <td>Craigmillar A.B.C Boxing Club</td>
+            <td><span class="badge bg-danger">Sports</span></td>
+            <td>16</td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td>1:30pm – 5:30pm</td>
+            <td>Poloniusz</td>
+            <td><span class="badge bg-danger">Education</span></td>
+            <td>51</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>9:30 - 1:30</td>
+            <td>Poloniusz</td>
+            <td><span class="badge bg-danger">Education</span></td>
+            <td>69</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>2:30 - 5:30</td>
+            <td>Play Group</td>
+            <td><span class="badge bg-danger">Education</span></td>
+            <td>40</td>
+          </tr>
+        <tr><td>Sunday</td><td>All Day</td><td>EFIGOC</td><td><span class="badge bg-dark">Community Booking</span></td><td>3</td></tr>
+        <tr><td>Sunday</td><td>All Day</td><td>African Church</td><td><span class="badge bg-dark">Faith Group</span></td><td>50</td></tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+<!-- Add this at the bottom of your file -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- CHARTS -->
+<script>
+new Chart(document.getElementById('satisfactionChart'), {
+  type: 'pie',
+  data: {
+    labels: ['Very Satisfied', 'Satisfied', 'Neutral', 'Dissatisfied', 'Very Dissatisfied'],
+    datasets: [{
+      data: [13, 1, 1, 1, 1], // Use "1" instead of 0.01 for stronger visibility
+      backgroundColor: ['#198754', '#0d6efd', '#ffc107', '#fd7e14', '#dc3545'],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          boxWidth: 20,
+          font: { size: 14 }
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: ctx => `${ctx.label}: ${ctx.raw} response${ctx.raw !== 1 ? 's' : ''}`
+        }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('timeChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Weekday Day', 'Weekday Evening', 'Weekend Day', 'Weekend Evening'],
+      datasets: [{
+        label: 'Votes',
+        data: [10, 1, 4, 1],
+        backgroundColor: '#0d6efd'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1 }
+        }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+
+  const orangeIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+  // Centered on Craigmillar, zoomed in
+  const map = L.map('activityMap').setView([55.9314, -3.1350], 15);
+
+  // Add base map tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+
+// Sandy’s pinpointed
+L.circleMarker([55.93083, -3.13390], {
+  radius: 6,
+  color: '#0d6efd',
+  fillColor: '#0d6efd',
+  fillOpacity: 1
+}).addTo(map).bindPopup("Sandy’s Community Centre");
+
+// Ripple effects (all centered on the same point)
+L.circle([55.93083, -3.13390], {
+  color: '#198754',
+  fillColor: '#198754',
+  fillOpacity: 0.15,
+  radius: 150
+}).addTo(map).bindPopup('Immediate Area – Local Families');
+
+L.circle([55.93083, -3.13390], {
+  color: '#fd7e14',
+  fillColor: '#fd7e14',
+  fillOpacity: 0.12,
+  radius: 300
+}).addTo(map).bindPopup('Extended Area – Wider Craigmillar');
+
+L.circle([55.93083, -3.13390], {
+  color: '#dc3545',
+  fillColor: '#dc3545',
+  fillOpacity: 0.10,
+  radius: 500
+}).addTo(map).bindPopup('Broader Reach – City Links');
+
+
+</script>
+
+</body>
+</html>
